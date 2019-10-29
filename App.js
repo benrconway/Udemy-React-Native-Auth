@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Header } from './src/components/common'
+import { SafeAreaView, StyleSheet } from 'react-native';
 import firebase from 'firebase'
-import firebaseConfig from './firebaseConfig';
+import { Header } from './src/components/common'
+import LoginForm from './src/components/LoginForm'
+import { firebaseConfig } from './firebaseConfig';
 
 class App extends Component{
   componentDidMount() {
-
+    !firebase.apps.length? firebase.initializeApp(firebaseConfig) : firebase.app();
   }
 
   render() {
     return (
-      <Header headerText="Auth App" />
+      <SafeAreaView style={styles.container}>
+        <Header headerText="Auth App" />
+        <LoginForm />
+      </SafeAreaView>
     )
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container:{
+    flex: 1
+  }
+});
 
 export default App;
